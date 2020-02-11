@@ -15,7 +15,6 @@ services:
     networks:
       - cidocker
   php:
-    privileged: true
     user: "${userid}:${groupid}"
     image: php:7.3-fpm
     build:

@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx
+    build:
+      dockerfile: Dockerfile
+      context: ./server/nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./app:/var/www/html
+      - ./uploads:/var/www/uploads
+    networks:
+      - cidocker
+  php:
+    user: "${userid}:${groupid}"
+    image: php:7.3-fpm
+    build:
+      dockerfile: Dockerfile
+      context: ./server/php-fpm
+    environment:
+      XDEBUG_CONFIG: remote_host=${ipaddr}
+      CI_ENV: development
+    volumes:
+      - ./app:/var/www/html
+      - ./uploads:/var/www/uploads
+    networks:
+      - cidocker
+
+networks:
+  cidocker:

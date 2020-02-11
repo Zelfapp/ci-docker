@@ -1,0 +1,6 @@
+.idea
+/app/application/logs/*
+# keep the directory only and .gitkeep
+!/app/application/logs/.gitkeep
+.vscode
+/app/node_modules
